@@ -1,11 +1,3 @@
-/* 
- * Josh Fisher
- * CS1699 Software Testing
- * Deliverable 3
- * Web Site Testing - Amazon
- * Due: March 3, 2015
-*/
-
 /*
  * User Story 3:
  * 

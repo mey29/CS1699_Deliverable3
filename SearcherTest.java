@@ -25,12 +25,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class SearcherTest
 {
-	//WebDriver driver = new org.openqa.selenium.htmlunit.HtmlUnitDriver();
 	WebDriver driver = new FirefoxDriver();
 
 	public void setUp() throws Exception {
-		driver.get("https://amazon.com");
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.get("http://www.amazon.com");
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	}
 			
 	@Test
@@ -79,7 +78,7 @@ public class SearcherTest
 	@Test
 	public void testSearchGoogle(){
 		try {
-			driver.get("https://google.com");
+			driver.get("http://google.com");
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			fail();

@@ -29,12 +29,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ShopperTest
 {
-	//WebDriver driver = new org.openqa.selenium.htmlunit.HtmlUnitDriver();
 	WebDriver driver = new FirefoxDriver();
 
 	public void setUp() throws Exception {
-		driver.get("https://amazon.com");
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.get("http://www.amazon.com");
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	}
 				
 	@Test

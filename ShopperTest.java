@@ -5,15 +5,10 @@
  * 
  * Scenarios: 
  * 
- * 1. testAddItem
  * 		Given a products page on Amazon, when I click "Add to Cart", then the item shows up in My Cart.
- * 2. testRemoveItem
  * 		Given My Cart on Amazon, when I click "Delete" on an item, then that item is no longer in My Cart.
- * 3. testChangeItemQuantity
  * 		Given My Cart on Amazon, when I change the quantity on an item, then My Cart is updated with the updated quantity.
- * 4. testItemInCart
  * 		Given the Amazon home page, when I click My Cart, the contents of My Cart show up.
- * 5. testShippingOption
  * 		Given My Cart on Amazon, when I enter a zip code, the shipping details are updated.
  * 
 */
@@ -35,7 +30,8 @@ public class ShopperTest
 		driver.get("http://www.amazon.com");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
-				
+	
+	//Given a products page on Amazon, when I click "Add to Cart", then the item shows up in My Cart.
 	@Test
 	public void testAddItem() {
 		
@@ -71,6 +67,7 @@ public class ShopperTest
 		driver.quit();
 	}
 	
+	//Given My Cart on Amazon, when I click "Delete" on an item, then that item is no longer in My Cart.
 	@Test
 	public void testRemoveItem() {
 		
@@ -119,6 +116,7 @@ public class ShopperTest
 		driver.quit();
 	}
 	
+	//Given My Cart on Amazon, when I change the quantity on an item, then My Cart is updated with the updated quantity.
 	@Test
 	public void testChangeItemQuantity() {
 		
@@ -170,6 +168,7 @@ public class ShopperTest
 		driver.quit();
 	}
 	
+	//Given the Amazon home page, when I click My Cart, the contents of My Cart show up.
 	@Test
 	public void testItemInCart() {
 		
@@ -208,6 +207,7 @@ public class ShopperTest
 		driver.quit();
 	}
 	
+	//Given My Cart on Amazon, when I enter a zip code, the shipping details are updated.
 	@Test
 	public void testShippingOption() {
 		

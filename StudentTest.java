@@ -5,17 +5,11 @@
  * 
  * Scenarios: 
  * 
- * 1. testSearchISBN
  * 		Given the Amazon home page, when I enter the textbook's ISBN number, then the correct textbook shows up in the results.
- * 2. testSearchWrongISBN
  * 		Given the Amazon home page, when I enter an incorrect ISBN number, then the correct textbook does not show up in the results.
- * 3. testSearchAuthor
  * 		Given the Amazon home page, when I enter the textbook's author's name, then the correct textbook shows up in the results.
- * 4. testSearchWrongAuthor
  * 		Given the Amazon home page, when I enter the textbook's author's name incorrectly, then the correct textbook does not show up in the results.
- * 5. testSearchName
  * 		Given the Amazon home page, when I enter the textbook's name, then the correct textbook shows up in the results.
- * 6. testSearchPublisher
  * 		Given the Amazon home page, when I enter the textbook's publisher's name, then the correct textbook shows up in the results.
  * 
 */
@@ -37,7 +31,8 @@ public class StudentTest
 		driver.get("http://www.amazon.com");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
-			
+		
+	//Given the Amazon home page, when I enter the textbook's ISBN number, then the correct textbook shows up in the results.
 	@Test
 	public void testSearchISBN() {
 		
@@ -67,6 +62,8 @@ public class StudentTest
 		driver.quit();
 	}
 	
+	
+	//Given the Amazon home page, when I enter an incorrect ISBN number, then the correct textbook does not show up in the results.
 	@Test
 	public void testSearchWrongISBN() {
 		
@@ -96,6 +93,7 @@ public class StudentTest
 		driver.quit();
 	}
 	
+	//Given the Amazon home page, when I enter the textbook's author's name, then the correct textbook shows up in the results.
 	@Test
 	public void testSearchAuthor() {
 		
@@ -125,6 +123,7 @@ public class StudentTest
 		driver.quit();
 	}
 	
+	//Given the Amazon home page, when I enter the textbook's author's name incorrectly, then the correct textbook does not show up in the results.
 	@Test
 	public void testSearchWrongAuthor() {
 		
@@ -154,6 +153,7 @@ public class StudentTest
 		driver.quit();
 	}
 	
+	//Given the Amazon home page, when I enter the textbook's name, then the correct textbook shows up in the results.
 	@Test
 	public void testSearchName() {
 		
@@ -182,6 +182,8 @@ public class StudentTest
 		driver.quit();
 	}
 	
+	
+	//Given the Amazon home page, when I enter the textbook's publisher's name, then the correct textbook shows up in the results.
 	@Test
 	public void testSearchPublisher() {
 		

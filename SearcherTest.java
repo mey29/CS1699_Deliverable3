@@ -8,7 +8,7 @@
  * 1. testSearchBar
  * 		Given the Amazon home page, when I enter a product's name in the search bar and press enter, then the product shows up in the results.
  * 2. testDepartment
- * 		Given the Amazon home page, when I click through the correct departments, the product shows up.
+ * 		Given the Amazon home page, when I click through the correct departments and search within that department, the product shows up.
  * 3. testSearchGoogle
  * 		Given the Google home page, when I click the search bar and enter a specific product and the word "amazon" and press enter, then a link to the product's page on amazon shows up in the results.
  * 
@@ -29,11 +29,13 @@ public class SearcherTest
 
 	public void setUp() throws Exception {
 		driver.get("http://www.amazon.com");
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 			
 	@Test
 	public void testSearchBar(){
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
@@ -46,9 +48,13 @@ public class SearcherTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_2")).click();
+		try {
+			driver.findElement(By.xpath("//li[3]/div/div/div/div[2]/div/a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
-		//assertTextPresent "Mockingjay"
+		//assertTextPresent "The Hunger Games: Mockingjay - Part 1 [Blu-ray + DVD + Digital HD]"
 		WebElement element = driver.findElement(By.id("productTitle"));
 		assertEquals(element.getText(), "The Hunger Games: Mockingjay - Part 1 [Blu-ray + DVD + Digital HD]");
 		driver.quit();
@@ -56,6 +62,8 @@ public class SearcherTest
 		
 	@Test
 	public void testDepartment(){
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
@@ -67,9 +75,20 @@ public class SearcherTest
 		//Click Movies & TV
 		driver.findElement(By.linkText("Movies & TV")).click();
 		
-		//Click on Mockinjay in Bestsellers?
+		//Click on text box for search and enter product (Mockingjay)
+		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Mockingjay blu ray");
 		
-		//assertTextPresent "Mockingjay"
+		//Click submit button
+		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
+		
+		//Click on first result
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
+		
+		//assertTextPresent "The Hunger Games: Mockingjay - Part 1 [Blu-ray + DVD + Digital HD]"
 		WebElement element = driver.findElement(By.id("productTitle"));
 		assertEquals(element.getText(), "The Hunger Games: Mockingjay - Part 1 [Blu-ray + DVD + Digital HD]");
 		driver.quit();
@@ -77,6 +96,8 @@ public class SearcherTest
 	
 	@Test
 	public void testSearchGoogle(){
+		
+		//Start at Google Homepage
 		try {
 			driver.get("http://google.com");
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -91,9 +112,9 @@ public class SearcherTest
 		driver.findElement(By.name("btnG")).click();
 		
 		//Click on first result
-		driver.findElement(By.linkText("http://www.amazon.com/The-Hunger-Games-Mockingjay-Blu-ray/dp/B00PYLT4YI")).click();
+		driver.findElement(By.xpath("//div/h3/a")).click();
 		
-		//assertTextPresent "Mockingjay"
+		//assertTextPresent "The Hunger Games: Mockingjay - Part 1 [Blu-ray + DVD + Digital HD]"
 		WebElement element = driver.findElement(By.id("productTitle"));
 		assertEquals(element.getText(), "The Hunger Games: Mockingjay - Part 1 [Blu-ray + DVD + Digital HD]");
 		driver.quit();

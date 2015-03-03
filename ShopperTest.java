@@ -33,16 +33,19 @@ public class ShopperTest
 
 	public void setUp() throws Exception {
 		driver.get("http://www.amazon.com");
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 				
 	@Test
 	public void testAddItem() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product (Moby Dick)
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Moby Dick");
 		
@@ -50,7 +53,11 @@ public class ShopperTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
 		//Click add to cart
 		driver.findElement(By.id("add-to-cart-button")).click();
@@ -60,17 +67,20 @@ public class ShopperTest
 		
 		//assertTextPresent "Moby Dick"
 		WebElement element = driver.findElement(By.id("activeCartViewForm"));
-		assertEquals(element.getText(), "Moby Dick");
+		assertTrue(element.getText().contains("Moby Dick"));
 		driver.quit();
 	}
 	
 	@Test
 	public void testRemoveItem() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product (Moby Dick)
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Moby Dick");
 		
@@ -78,24 +88,31 @@ public class ShopperTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
-		//
+		//Click add to cart button
 		driver.findElement(By.id("add-to-cart-button")).click();
 		
-		//
+		//Click on cart
 		driver.findElement(By.id("nav-cart-count")).click();
 		
 		//Click "Remove" to remove item
 		driver.findElement(By.name("submit.delete.C24K1WI0ZUJWF")).click();
 		
-		//Click on Cart
-		driver.findElement(By.cssSelector("span.nav-action-inner")).click();
+		//Go to Amazon homepage
+		driver.findElement(By.cssSelector("span.nav-logo-base.nav-sprite")).click();
+				
+		//Click on cart button
+		driver.findElement(By.id("nav-cart")).click();
 		
 		//assertTextNotPresent "Moby Dick"
 		try {
 			WebElement element = driver.findElement(By.id("activeCartViewForm"));
-			assertNotEquals(element.getText(), "Moby Dick");
+			assertFalse(element.getText().contains("Moby Dick"));
 		} catch (NoSuchElementException ex) {
 			fail();
 		}
@@ -104,11 +121,14 @@ public class ShopperTest
 	
 	@Test
 	public void testChangeItemQuantity() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product (Moby Dick)
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Moby Dick");
 		
@@ -116,9 +136,13 @@ public class ShopperTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
-		//
+		//Click on add to cart button
 		driver.findElement(By.id("add-to-cart-button")).click();
 		
 		//Click on text box for search and enter product (Moby Dick)
@@ -128,27 +152,34 @@ public class ShopperTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
-		//
+		//Click on add to cart button
 		driver.findElement(By.id("add-to-cart-button")).click();
 		
-		//
+		//Click on cart button
 		driver.findElement(By.cssSelector("span.nav-cart-button.nav-sprite")).click();
 		
 		//assertTextPresent "updated to 2"
 		WebElement element = driver.findElement(By.cssSelector("p.a-spacing-none.a-spacing-top-mini"));
-		assertEquals(element.getText(), "Please note that the quantity of Moby Dick has been updated to 2.");
+		assertTrue(element.getText().contains("updated to 2"));
 		driver.quit();
 	}
 	
 	@Test
 	public void testItemInCart() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product (Moby Dick)
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Moby Dick");
 		
@@ -156,29 +187,31 @@ public class ShopperTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
 		//Click add to cart
 		driver.findElement(By.id("add-to-cart-button")).click();
 		
 		//Go to amazon.com
-		try {
-			setUp();
-		} catch (Exception e) {
-			fail();
-		}
+		driver.findElement(By.cssSelector("span.nav-logo-base.nav-sprite")).click();
 		
 		//Click on cart
 		driver.findElement(By.id("nav-cart")).click();
 		
 		//assertTextPresent "Moby Dick"
 		WebElement element = driver.findElement(By.id("activeCartViewForm"));
-		assertEquals(element.getText(), "Moby Dick");
+		assertTrue(element.getText().contains("Moby Dick"));
 		driver.quit();
 	}
 	
 	@Test
 	public void testShippingOption() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
@@ -191,7 +224,11 @@ public class ShopperTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 		
 		//Click add to cart
 		driver.findElement(By.id("add-to-cart-button")).click();

@@ -35,16 +35,19 @@ public class StudentTest
 
 	public void setUp() throws Exception {
 		driver.get("http://www.amazon.com");
-		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 			
 	@Test
 	public void testSearchISBN() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("978-0672327988");
 		
@@ -52,7 +55,11 @@ public class StudentTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	
 		//assertTextPresent "Software Testing"
 		WebElement element = driver.findElement(By.id("productTitle"));
@@ -62,11 +69,14 @@ public class StudentTest
 	
 	@Test
 	public void testSearchWrongISBN() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product 
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("978-0321385178");
 		
@@ -74,7 +84,11 @@ public class StudentTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	
 		//assertTextNotPresent "Software Testing"
 		WebElement element = driver.findElement(By.id("productTitle"));
@@ -84,11 +98,14 @@ public class StudentTest
 	
 	@Test
 	public void testSearchAuthor() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Ron Patton");
 		
@@ -96,7 +113,11 @@ public class StudentTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	
 		//assertTextPresent "Software Testing"
 		WebElement element = driver.findElement(By.id("productTitle"));
@@ -106,11 +127,14 @@ public class StudentTest
 	
 	@Test
 	public void testSearchWrongAuthor() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product 
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Ron Paten");
 		
@@ -118,7 +142,11 @@ public class StudentTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	
 		//assertTextNotPresent "Software Testing"
 		WebElement element = driver.findElement(By.id("productTitle"));
@@ -128,19 +156,25 @@ public class StudentTest
 	
 	@Test
 	public void testSearchName() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
 		//Click on text box for search and enter product 
-		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Software Testing (2nd Edition)");
+		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Software Testing 2nd Edition");
 		
 		//Click submit button
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	
 		//assertTextPresent "Software Testing" (2nd result)
 		WebElement element = driver.findElement(By.id("productTitle"));
@@ -150,11 +184,14 @@ public class StudentTest
 	
 	@Test
 	public void testSearchPublisher() {
+		
+		//Start at Amazon Homepage
 		try {
 			setUp();
 		} catch (Exception e) {
 			fail();
 		}
+		
 		//Click on text box for search and enter product 
 		driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Sams Publishing Software Testing");
 		
@@ -162,7 +199,11 @@ public class StudentTest
 		driver.findElement(By.cssSelector("input.nav-submit-input")).click();
 		
 		//Click on first result
-		driver.findElement(By.id("result_O")).click();
+		try {
+			driver.findElement(By.xpath("//a/h2")).click();
+		} catch (NoSuchElementException ex) {
+			fail();
+		}
 	
 		//assertTextPresent "Software Testing"
 		WebElement element = driver.findElement(By.id("productTitle"));
